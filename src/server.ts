@@ -10,12 +10,15 @@ process.on("uncaughtException", (err) => {
 dotenv.config();
 
 import app from "./app";
+import { mongoConnect } from "./lib/mongo";
 
 const PORT = process.env.PORT || 3000;
 
 const server = http.createServer(app);
 
 async function startServer() {
+  await mongoConnect();
+
   server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
