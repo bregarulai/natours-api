@@ -11,3 +11,13 @@ export const getAll = (modelFunction: Function) =>
       data: { data: response },
     });
   });
+
+export const createOne = (modelFunction: Function) =>
+  catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+    const response = await modelFunction(req.body);
+
+    res.status(200).json({
+      status: "success",
+      data: { data: response },
+    });
+  });
